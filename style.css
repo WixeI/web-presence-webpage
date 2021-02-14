@@ -1,0 +1,278 @@
+
+/* Variables */
+/* São utilizadas usando "var(--variável)" */
+:root {
+    --primary: #ddd;
+    --highlight: rgb(28, 171, 190);
+    --dark: #333;
+    --light: #fff;
+    --shadow: 0 1px 5px rgba(104,104,104,0.8);
+}
+
+/* Default */
+/* Define padrões do arquivo */
+html {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--dark);
+}
+
+/* Define padrões do canvas */
+body {
+    background: #ccc;
+    margin: 30px 50px;
+    line-height: 1.4;
+}
+
+/* Objetos Simples */
+
+/* Faz com que toda imagem ocupe 100% do seu contêiner. Nem mais, nem menos. */
+/* Evita que imagens quebrem o width máximo da página e permitam scroll horizontal */
+img {
+    max-width: 100%;
+}
+
+/* Botão Padrão */
+.btn {
+    background-color: var(--dark);
+    color: var(--light);
+    text-decoration: unset;
+    padding: 10px 20px;
+    border: 0;
+}
+
+.btn:hover {
+    background-color: var(--highlight);
+}
+
+/* Grid das seções principais do site */
+/* Os elementos daqui são main-nav, main-content, main-footer */
+.wrapper, .main-content {
+    display: grid;
+    grid-gap: 20px;
+}
+
+/* Navigation */
+.main-nav > ul {
+    display: grid;
+    grid-gap: 20px;
+    /* Remove os bullet points */
+    list-style: none;
+    padding: 0;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+/* Manipulamos o "a" pois ele sendo o botão faz com que a área inteira do mesmo seja clicável. */
+.main-nav a {
+    /* Display que cada item ocupa uma linha inteira de seu contêiner */
+    display: block;
+    background-color: var(--dark);
+    color: var(--light);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    /* Remove o underline de links */
+    text-decoration: unset;
+    box-shadow: var(--shadow);
+    text-align: center;
+    padding: 20px 0px;
+}
+
+.main-nav a:hover {
+    background-color: var(--highlight);
+}
+
+/**** Main Content > First Impression ****/
+.first-impression {
+    display: grid;
+    grid-gap: 20px;
+    /* Showcase adaptável. Price boxes: width mínimo 200px. Acima disso ocupa 15% width da viewport*/
+    grid-template-columns: auto auto minmax(200px, 15vw); 
+    /* Nomes dados para as partes da grid */
+    grid-template-areas: "show show box-a"
+                        "show show box-b";
+    /* Altura dos rows tem um mínimoo de 190px e um padrão de 35% height da viewport */
+    /* É a melhor forma de manter esta parte sempre completamente visível na tela. Afinal, é a primeira impressão que o site gera. */
+    grid-auto-rows: minmax(190px, 35vh);
+    
+}
+
+.showcase {
+    grid-area: show;
+    /* Formatação simples */
+    background-image: url(img/bg.jpg);
+    background-position: center;
+    background-size: cover;
+    padding: 3rem;
+    box-shadow: var(--shadow);
+    /* Conteúdo organizado por Flex Vertical */
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    
+}
+
+.showcase h1 {
+    color: var(--primary);
+    font-size: 4rem;
+    /* Para ficar mais próxima do subtítulo */
+    margin-bottom: 0;
+}
+
+.showcase p {
+    color: var(--primary);
+    /* Para ficar mais próxima do título */
+    margin-top: 0;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+}
+
+.showcase .btn {
+    /* Modificação do tipo padrão de botão */
+    background-color: var(--highlight);
+}
+
+/* Classe pai que define comportamento das top-boxes */
+.top-box {
+    background: var(--primary);
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    /* Organização por Flexbox Vertical */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Pega os itens que "content" engloba e espaça igualmente pelo espaço disponível da flexbox/grid */
+    justify-content:space-evenly;
+}
+
+.top-box p {
+    font-size: 2rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.top-box h4 {
+    font-size: 1.5rem;
+    /* Zera as margens verticais para sua height final diminuir e o espaçamento de "justify-content: space-evenly" espaçar melhor */
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+
+
+.box-a {
+    grid-area: box-a;
+}
+
+.box-b {
+    grid-area: box-b;
+
+}
+
+/* Boxes */
+.boxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.box {
+    /* Formating */
+    display: flex;
+    flex-direction: column;
+    
+    padding: 1rem;
+    align-items: center;
+
+    /* Color */
+    background: var(--primary);
+    box-shadow: var(--shadow);
+}
+
+.box p {
+    text-align: center;
+}
+
+/* Learn-More */
+.learn-more {
+    /* Formating */
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-areas: "img txt";
+    grid-gap: 2rem;
+    padding: 1.5rem;
+
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    
+    /* Color */
+    background: var(--primary);
+    box-shadow: var(--shadow);
+}
+
+.learn-more #image {
+    grid-area: img;
+    background-image: url(img/learn-more.jpg);
+    background-position: center;
+    background-size: cover;
+    box-shadow: var(--shadow);
+}
+
+.learn-more .txt {
+    grid-area: txt;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+.txt h2 {
+    margin: 0px;
+    padding: 0px;
+    font-size: 2rem;
+}
+
+.txt p {
+    margin: 2rem 0 2rem 0;
+}
+
+.txt .btn {
+    text-align: center;
+}
+
+/* Portfolio */
+.portfolio {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 0.5rem;
+}
+
+.portfolio img {
+    box-shadow: var(--shadow);
+}
+
+/* Footer */
+.main-footer {
+    margin-top: 2rem;
+    background: var(--dark);
+    color: var(--light);
+    text-align: center;
+}
+
+
+/* Media Queries */
+@media (min-width:1500px){
+    html {
+        font-size: larger;
+    }
+}
+
+/* @media (min-width:1700px) {
+    .first-impression {
+        grid-template-areas: "show show show show box-a"
+                            "show show show show box-b";
+        
+    }
+}*/
